@@ -741,3 +741,48 @@ footer {
 .founder-btn:hover i {
     transform: translateX(4px);  /* Arrow moves slightly */
 }
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.icon-box-small {
+    width: 60px;
+    height: 60px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.icon-box-small i {
+    color: #d93025;
+    font-size: 20px;
+}
+
+.contact-item h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    font-weight: 700;
+}
+
+.contact-item p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 1rem;
+    line-height: 1.4;
+}
