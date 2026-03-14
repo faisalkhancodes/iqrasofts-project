@@ -38,6 +38,11 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
+        if self.path != '/api/chat':
+            self.send_response(404)
+            self.end_headers()
+            return
+
         # Set common headers
         self.send_response(200)
         self.send_header('Content-type', 'application/json')
@@ -89,3 +94,20 @@ class handler(BaseHTTPRequestHandler):
             # Handle any errors gracefully
             error_response = {"error": f"An error occurred: {str(e)}"}
             self.wfile.write(json.dumps(error_response).encode('utf-8'))
+
+if __name__ == "__main__":
+    from http.server import HTTPServer
+    import sys
+
+    # Check if API key is set
+    if not os.environ.get("OPENAI_API_KEY"):
+        print("Error: OPENAI_API_KEY environment variable not set.")
+        print("Please set it with: export OPENAI_API_KEY='your-key-here'")
+        sys.exit(1)
+
+    # Run the server on port 8000
+    server_address = ('', 8000)
+    httpd = HTTPServer(server_address, handler)
+    print("Starting AI Chat Server on port 8000...")
+    print("Access the chat at http://localhost:8000/api/chat")
+    httpd.serve_forever()
