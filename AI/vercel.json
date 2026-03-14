@@ -1,0 +1,12 @@
+{
+  "builds": [
+    {
+      "src": "api/**/*.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "**/*",
+      "use": "@vercel/static"
+    }
+  ]
+}

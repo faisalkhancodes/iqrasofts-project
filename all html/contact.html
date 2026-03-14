@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="Iqrasofts logoo.jpeg" type="image/png">
+    <link rel="shortcut icon" href="../Iqrasofts logoo.jpeg" type="image/png">
 </head>
 
 <body>
@@ -30,10 +30,10 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <img src="Iqrasofts logoo.jpeg" alt="IqraSoft">
+                    <img src="../Iqrasofts logoo.jpeg" alt="IqraSoft">
                 </div>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="../index.html">Home</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="projects.html">Projects</a></li>
                     <li><a href="team.html">Team</a></li>
@@ -187,7 +187,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
     <script>
         // FAQ Accordion
         document.addEventListener('DOMContentLoaded', function () {
@@ -253,6 +253,45 @@
             }
         });
     </script>
-</body>
 
+        <!-- AI Assistant Chat Widget -->
+    <div id="ai-chat-widget" class="ai-widget-container closed">
+        <!-- Chat Header -->
+        <div class="ai-chat-header">
+            <div class="ai-assistant-info">
+                <img src="../Iqrasofts logoo.jpeg" alt="IqraSofts Logo" class="ai-avatar">
+                <div>
+                    <h4>IqraSofts Assistant</h4>
+                    <span class="ai-status">Online</span>
+                </div>
+            </div>
+            <button id="ai-close-btn" class="ai-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div id="ai-chat-messages" class="ai-chat-messages">
+            <!-- Default Welcome Message -->
+            <div class="message bot-message">
+                <p>Hello! ?? I'm the IqraSofts Assistant. How can I help you today? Would you like to know more about our Web Development, Cybersecurity, or UI/UX services?</p>
+            </div>
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="ai-chat-input-area">
+            <textarea id="ai-chat-input" placeholder="Type your message..." rows="1"></textarea>
+            <button id="ai-send-btn" class="ai-send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button id="ai-fab" class="ai-fab">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+</body>
 </html>
+
+

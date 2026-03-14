@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="Iqrasofts logoo.jpeg" type="image/png">
+    <link rel="shortcut icon" href="../Iqrasofts logoo.jpeg" type="image/png">
 </head>
 
 <body>
@@ -30,10 +30,10 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <img src="Iqrasofts logoo.jpeg" alt="IqraSoft">
+                    <img src="../Iqrasofts logoo.jpeg" alt="IqraSoft">
                 </div>
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="../index.html">Home</a></li>
                     <li><a href="services.html">Services</a></li>
                     <li><a href="projects.html">Projects</a></li>
                     <li><a href="team.html" class="active">Team</a></li>
@@ -70,7 +70,7 @@
                 <!-- Founder Profile -->
                 <div class="team-member featured reveal">
                     <div class="member-image">
-                        <img src="Engr Faisal Khan.jpeg" alt="Engr Faisal Khan">
+                        <img src="../Engr Faisal Khan.jpeg" alt="Engr Faisal Khan">
                         <div class="member-social">
                             <a href="https://ifaisalkhan.netlify.app/" target="_blank"><i class="fas fa-globe"></i></a>
                             <a href="https://www.linkedin.com/in/faisal-khan-123456" target="_blank"><i
@@ -124,7 +124,7 @@
                 <!-- Web Developer 1 -->
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="Aizaz WD.jpeg" alt="M. Aizaz">
+                        <img src="../Aizaz WD.jpeg" alt="M. Aizaz">
 
                     </div>
                     <div class="member-info">
@@ -149,7 +149,7 @@
                 <!-- Web Developer 2 -->
                 <div class="team-member reveal">
                     <div class="member-image">
-                        <img src="Bilal.png" alt="Bilal Khan">
+                        <img src="../Bilal.png" alt="Bilal Khan">
 
                     </div>
                     <div class="member-info">
@@ -174,7 +174,7 @@
                 <!-- Web Developer 3 -->
                 <div class="team-member reveal">
                     <div class="member-image">
-                        <img src="Sharafat.jpeg" alt="Sharafat Ullah">
+                        <img src="../Sharafat.jpeg" alt="Sharafat Ullah">
 
                     </div>
                     <div class="member-info">
@@ -211,7 +211,7 @@
                 <!-- AI/ML Engineer -->
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="Hamza AI.png" alt="M. Hamza">
+                        <img src="../Hamza AI.png" alt="M. Hamza">
 
                     </div>
                     <div class="member-info">
@@ -236,7 +236,7 @@
                 <!-- Cyber Security Expert -->
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="Habib Cyber S.jpeg" alt="Habib Ullah">
+                        <img src="../Habib Cyber S.jpeg" alt="Habib Ullah">
 
                     </div>
                     <div class="member-info">
@@ -261,7 +261,7 @@
                 <!-- Graphic Designer -->
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="Rubab.png" alt="Rubab Bukhari">
+                        <img src="../Rubab.png" alt="Rubab Bukhari">
 
                     </div>
                     <div class="member-info">
@@ -286,7 +286,7 @@
                 <!-- Video Editor -->
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="Azlan.jpeg" alt="Azlan Zafar">
+                        <img src="../Azlan.jpeg" alt="Azlan Zafar">
 
                     </div>
                     <div class="member-info">
@@ -311,7 +311,7 @@
                 <!-- HR Manager -->
                 <div class="team-member">
                     <div class="member-image">
-                        <img src="Kinza.jpeg" alt="Kinza">
+                        <img src="../Kinza.jpeg" alt="Kinza">
 
                     </div>
                     <div class="member-info">
@@ -396,7 +396,46 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-</body>
+    <script src="../script.js"></script>
 
+        <!-- AI Assistant Chat Widget -->
+    <div id="ai-chat-widget" class="ai-widget-container closed">
+        <!-- Chat Header -->
+        <div class="ai-chat-header">
+            <div class="ai-assistant-info">
+                <img src="../Iqrasofts logoo.jpeg" alt="IqraSofts Logo" class="ai-avatar">
+                <div>
+                    <h4>IqraSofts Assistant</h4>
+                    <span class="ai-status">Online</span>
+                </div>
+            </div>
+            <button id="ai-close-btn" class="ai-close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div id="ai-chat-messages" class="ai-chat-messages">
+            <!-- Default Welcome Message -->
+            <div class="message bot-message">
+                <p>Hello! ?? I'm the IqraSofts Assistant. How can I help you today? Would you like to know more about our Web Development, Cybersecurity, or UI/UX services?</p>
+            </div>
+        </div>
+
+        <!-- Chat Input Area -->
+        <div class="ai-chat-input-area">
+            <textarea id="ai-chat-input" placeholder="Type your message..." rows="1"></textarea>
+            <button id="ai-send-btn" class="ai-send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button id="ai-fab" class="ai-fab">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+</body>
 </html>
+
+
