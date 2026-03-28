@@ -7,11 +7,11 @@
     },
     {
       "source": "/",
-      "destination": "/all html/index.html"
+      "destination": "/all%20html/index.html"
     },
     {
-      "source": "/(.*)",
-      "destination": "/all html/$1"
+      "source": "/(.*).html",
+      "destination": "/all%20html/$1.html"
     }
   ]
 }
