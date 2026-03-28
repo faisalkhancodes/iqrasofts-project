@@ -2,6 +2,8 @@
   "version": 2,
   "rewrites": [
     { "source": "/", "destination": "/all html/index.html" },
+    { "source": "/blog", "destination": "/all html/blog.html" },
+    { "source": "/services", "destination": "/all html/services.html" },
     { "source": "/api/(.*)", "destination": "/api/index.py" }
   ]
 }
