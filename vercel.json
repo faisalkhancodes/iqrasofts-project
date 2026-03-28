@@ -1,9 +1,13 @@
 {
   "version": 2,
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "/all html/index.html" },
     { "source": "/blog", "destination": "/all html/blog.html" },
+    { "source": "/contact", "destination": "/all html/contact.html" },
+    { "source": "/projects", "destination": "/all html/projects.html" },
     { "source": "/services", "destination": "/all html/services.html" },
+    { "source": "/team", "destination": "/all html/team.html" },
     { "source": "/api/(.*)", "destination": "/api/index.py" }
   ]
 }
