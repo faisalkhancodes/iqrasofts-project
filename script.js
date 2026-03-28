@@ -208,7 +208,9 @@ document.addEventListener('DOMContentLoaded', () => {
         showTypingIndicator();
 
         try {
-            const response = await fetch('http://localhost:8000/api/chat', {
+            const isLocal = window.location.hostname === 'localhost' || window.location.protocol === 'file:';
+            const apiUrl = isLocal ? 'http://localhost:8000/api/chat' : '/api/chat';
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

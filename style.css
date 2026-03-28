@@ -652,7 +652,7 @@ nav {
 footer {
     background: #1F2937;
     color: #F9FAFB;
-    padding: 2rem 0;
+    padding: 2rem 0 120px 0; /* Extra 120px to prevent WhatsApp and AI icons from covering footer text */
     margin-top: 4rem;
 }
 
@@ -2552,3 +2552,114 @@ footer {
         height: 55px;
     }
 }
+@media (max-width: 768px) {
+    .team-member.featured {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 1.5rem !important;
+        gap: 1.5rem !important;
+    }
+    .team-member.featured .member-image img {
+        width: 150px !important;
+        height: 150px !important;
+    }
+}
+
+/* WhatsApp FAB */
+.wa-fab {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25D366;
+    color: white;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    z-index: 9998;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.wa-fab:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-premium);
+    color: white;
+}
+
+/* Expanded AI FAB Updates */
+.ai-fab {
+    width: auto !important;
+    padding: 0 16px;
+    border-radius: 30px !important;
+    gap: 8px;
+}
+.ai-fab-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+@media (max-width: 480px) {
+    .wa-fab {
+        left: 16px;
+        bottom: 16px;
+        width: 55px;
+        height: 55px;
+        font-size: 2rem;
+    }
+    .ai-fab-text {
+        display: none;
+    }
+    .ai-fab {
+        width: 55px !important;
+        padding: 0 !important;
+        border-radius: 50% !important;
+    }
+}
+
+/* Deep Responsive Fixes for Team Page Grid */
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        padding: 0 1rem;
+    }
+    
+    .team-member {
+        padding: 1.5rem !important;
+    }
+    
+    /* Ensure the process-grid and services-grid also don't break on small screens */
+    .services-grid, .process-grid, .blog-grid, .portfolio-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .container {
+        padding: 0 15px !important;
+    }
+    
+    .page-hero {
+        padding: 140px 0 60px !important;
+    }
+    
+    .page-hero-content h1 {
+        font-size: 2.2rem !important;
+    }
+}
+
+@media (max-width: 350px) {
+    /* For ultra small screens like iPhone SE */
+    .founder-img-wrapper, .member-image img {
+        width: 120px !important;
+        height: 120px !important;
+    }
+    
+    .team-member.featured {
+        padding: 1rem !important;
+    }
+}
+
+/* Global Overflow Prevention */
+html, body { overflow-x: hidden; max-width: 100%; }

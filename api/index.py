@@ -3,9 +3,8 @@ import json
 from http.server import BaseHTTPRequestHandler
 from openai import OpenAI
 
-# Initialize the OpenAI client
-# Vercel reads the OPENAI_API_KEY from environment variables securely
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+# We will initialize the client dynamically inside the request handle
+# to prevent load-time crashes if the API key is missing.
 
 SYSTEM_PROMPT = """Identity: You are the official AI Assistant for IqraSofts, a professional software house and digital services venture. Your goal is to be helpful, professional, and technically savvy.
 
@@ -38,10 +37,8 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
-        if self.path != '/api/chat':
-            self.send_response(404)
-            self.end_headers()
-            return
+        # We don't check for self.path = '/api/chat' because Vercel handles routing, 
+        # and self.path might evaluate differently in its serverless environment.
 
         # Set common headers
         self.send_response(200)
@@ -75,6 +72,9 @@ class handler(BaseHTTPRequestHandler):
             # Construct the full message history for OpenAI
             openai_messages = [{"role": "system", "content": SYSTEM_PROMPT}]
             openai_messages.extend(user_messages)
+
+            # Initialize client dynamically here to avoid crash-on-load
+            client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
             # Call OpenAI API
             completion = client.chat.completions.create(
