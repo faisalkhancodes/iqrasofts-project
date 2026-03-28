@@ -22,6 +22,84 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="../pictures/Iqrasofts logoo.jpeg" type="image/png">
+
+    <!-- Dedicated Responsive Fixes for Team Page -->
+    <style>
+        @media (max-width: 992px) {
+            .team-member.featured {
+                flex-direction: column !important;
+                padding: 2rem !important;
+                text-align: center !important;
+                gap: 2rem !important;
+            }
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+            }
+        }
+        @media (max-width: 768px) {
+            .team-member.featured {
+                padding: 1.5rem !important;
+                gap: 1.5rem !important;
+            }
+            .team-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 1.5rem !important;
+            }
+            .team-member {
+                padding: 1.5rem !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            .page-hero {
+                padding: 120px 20px 60px !important;
+            }
+            .page-hero-content h1 {
+                font-size: 2.2rem !important;
+            }
+            .member-image {
+                margin: 0 auto !important;
+                display: flex;
+                justify-content: center;
+            }
+            .member-image img {
+                width: 140px !important;
+                height: 140px !important;
+            }
+            .container {
+                padding: 0 15px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                overflow-x: hidden !important;
+            }
+            body {
+                overflow-x: hidden !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .member-achievements ul {
+                padding-left: 1rem;
+                text-align: left;
+            }
+            .member-skills {
+                justify-content: center;
+            }
+            .member-stats {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
+            .btn-primary {
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            .section {
+                padding: 60px 0 !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -396,7 +474,7 @@
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    
 
         <!-- AI Assistant Chat Widget -->
     <div id="ai-chat-widget" class="ai-widget-container closed">
@@ -405,7 +483,7 @@
             <div class="ai-assistant-info">
                 <img src="../pictures/Iqrasofts logoo.jpeg" alt="IqraSofts Logo" class="ai-avatar">
                 <div>
-                    <h4>IqraSofts Assistant</h4>
+                    <h4>Iqrasofts AI Assistant</h4>
                     <span class="ai-status">Online</span>
                 </div>
             </div>
@@ -418,7 +496,7 @@
         <div id="ai-chat-messages" class="ai-chat-messages">
             <!-- Default Welcome Message -->
             <div class="message bot-message">
-                <p>Hello! 👋 I'm the IqraSofts Assistant. How can I help you today? Would you like to know more about our Web Development, Cybersecurity, or UI/UX services?</p>
+                <p>Hello! 👋 I'm the Iqrasofts AI Assistant. How can I help you today? Would you like to know more about our Web Development, Cybersecurity, or UI/UX services?</p>
             </div>
         </div>
 
@@ -431,12 +509,18 @@
         </div>
     </div>
 
+    <!-- WhatsApp Floating Action Button -->
+    <a href="https://wa.me/923715316610" target="_blank" id="wa-fab" class="wa-fab">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <!-- Floating Action Button -->
     <button id="ai-fab" class="ai-fab">
-        <i class="fas fa-comment-dots"></i>
+        <img src="../pictures/Iqrasofts logoo.jpeg" alt="AI Icon" style="width: 25px; height: 25px; border-radius: 50%; object-fit: cover; background: white; padding: 2px;">
+        <span class="ai-fab-text">Iqrasofts AI Assistant</span>
     </button>
+    <script src="../script.js"></script>
 </body>
-<script src="../script.js"></script>
 </html>
 
 
