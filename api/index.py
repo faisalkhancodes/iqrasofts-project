@@ -6,7 +6,7 @@ from openai import OpenAI
 # We will initialize the client dynamically inside the request handle
 # to prevent load-time crashes if the API key is missing.
 
-SYSTEM_PROMPT = """Identity: You are the official AI Assistant for IqraSofts, a professional software house and digital services venture. Your goal is to be helpful, professional, and technically savvy.
+SYSTEM_PROMPT = """Identity: You are the official AI Assistant for ISoft, a professional software house and digital services venture. Your goal is to be helpful, professional, and technically savvy.
 
 Core Services to Mention:
 - Web Development: Frontend (React, HTML, CSS), WordPress, and full CMS solutions.
@@ -65,7 +65,7 @@ class handler(BaseHTTPRequestHandler):
 
             if not user_messages:
                  # Default greeting if no messages provided
-                 response_text = "Hello! I am the IqraSofts AI Assistant. How can I help you today?"
+                 response_text = "Hello! I am the ISoft AI Assistant. How can I help you today?"
                  self.wfile.write(json.dumps({"reply": response_text}).encode('utf-8'))
                  return
 

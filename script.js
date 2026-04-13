@@ -1,7 +1,7 @@
 // Script.js - Interactive functionality for IqraSoft
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('IqraSoft Website Loaded');
+    console.log('ISoft Website Loaded');
 
     // Mobile Menu Toggle logic will go here
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
