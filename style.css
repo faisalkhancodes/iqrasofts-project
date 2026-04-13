@@ -19,6 +19,16 @@
     --border-radius: 12px;
 }
 
+
+/* Global Overflow Prevention */
+html, body { overflow-x: hidden; max-width: 100%; }
+
+
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 /* Certifications/Services Grid */
 .cert-container {
     display: grid;
@@ -2661,5 +2671,6 @@ footer {
     }
 }
 
-/* Global Overflow Prevention */
-html, body { overflow-x: hidden; max-width: 100%; }
+
+
+
