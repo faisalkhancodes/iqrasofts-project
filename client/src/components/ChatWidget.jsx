@@ -20,6 +20,7 @@ export default function ChatWidget() {
   const [history, setHistory] = useState([]);
   const [sending, setSending] = useState(false);
   const messagesEnd = useRef(null);
+  const textareaRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEnd.current?.scrollIntoView({ behavior: "smooth" });
@@ -38,6 +39,7 @@ export default function ChatWidget() {
     setHistory(nextHistory);
     setInput("");
     setSending(true);
+    if (textareaRef.current) textareaRef.current.style.height = "auto";
 
     try {
       const res = await fetch("/api/chat", {
@@ -56,7 +58,7 @@ export default function ChatWidget() {
             content:
               typeof data.error === "string"
                 ? data.error
-                : "I'm having trouble connecting right now. Please try again.",
+                : "I'm sorry, I'm having trouble connecting right now.",
           },
         ]);
       } else if (data.reply) {
@@ -70,7 +72,8 @@ export default function ChatWidget() {
         ...h,
         {
           role: "assistant",
-          content: "Oops! Something went wrong communicating with the server.",
+          content:
+            "Oops! Something went wrong communicating with the server.",
         },
       ]);
     } finally {
@@ -88,13 +91,13 @@ export default function ChatWidget() {
         <div className="ai-chat-header">
           <div className="ai-assistant-info">
             <img
+              src="/pictures/iqrasoftlogo.jpeg"
+              alt="IqraSoft Logo"
               className="ai-avatar"
-              src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=80&h=80&fit=crop"
-              alt=""
             />
             <div>
-              <h4>IqraSoft AI</h4>
-              <div className="ai-status">Online</div>
+              <h4>IqraSoft AI Assistant</h4>
+              <span className="ai-status">Online</span>
             </div>
           </div>
           <button
@@ -108,14 +111,13 @@ export default function ChatWidget() {
           </button>
         </div>
         <div id="ai-chat-messages" className="ai-chat-messages">
-          {history.length === 0 && (
-            <div className="message bot-message">
-              <p>
-                Hi! I am the IqraSoft assistant. Ask me about our services,
-                stack, or how we can help with your project.
-              </p>
-            </div>
-          )}
+          <div className="message bot-message">
+            <p>
+              Hello! 👋 I&apos;m the IqraSoft AI Assistant. How can I help you
+              today? Would you like to know more about our Web Development,
+              Cybersecurity, or UI/UX services?
+            </p>
+          </div>
           {history.map((m, i) => (
             <div
               key={i}
@@ -123,7 +125,9 @@ export default function ChatWidget() {
                 m.role === "user" ? "user-message" : "bot-message"
               }`}
             >
-              <p dangerouslySetInnerHTML={{ __html: formatMessage(m.content) }} />
+              <p
+                dangerouslySetInnerHTML={{ __html: formatMessage(m.content) }}
+              />
             </div>
           ))}
           {sending && (
@@ -137,18 +141,23 @@ export default function ChatWidget() {
         </div>
         <div className="ai-chat-input-area">
           <textarea
+            ref={textareaRef}
             id="ai-chat-input"
             placeholder="Type your message..."
             rows={1}
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              setInput(e.target.value);
+              const ta = e.target;
+              ta.style.height = "auto";
+              ta.style.height = `${ta.scrollHeight}px`;
+            }}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
               }
             }}
-            style={{ height: "auto" }}
           />
           <button
             type="button"
@@ -162,6 +171,17 @@ export default function ChatWidget() {
           </button>
         </div>
       </div>
+
+      <a
+        href="https://wa.me/923715316610"
+        target="_blank"
+        id="wa-fab"
+        className="wa-fab"
+        rel="noopener noreferrer"
+      >
+        <i className="fab fa-whatsapp" />
+      </a>
+
       <button
         type="button"
         id="ai-fab"
@@ -170,7 +190,18 @@ export default function ChatWidget() {
         aria-expanded={open}
         aria-controls="ai-chat-widget"
       >
-        <i className="fas fa-robot" />
+        <img
+          src="/pictures/iqrasoftlogo.jpeg"
+          alt="AI Icon"
+          style={{
+            width: 25,
+            height: 25,
+            borderRadius: "50%",
+            objectFit: "cover",
+            background: "white",
+            padding: 2,
+          }}
+        />
         <span className="ai-fab-text">IqraSoft AI Assistant</span>
       </button>
     </>
