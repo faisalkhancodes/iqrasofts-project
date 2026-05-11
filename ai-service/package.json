@@ -1,0 +1,8 @@
+{
+  "name": "iqrasoft-ai-service",
+  "private": true,
+  "scripts": {
+    "dev": "python -m uvicorn main:app --reload --host 127.0.0.1 --port 5050",
+    "start": "python -m uvicorn main:app --host 127.0.0.1 --port 5050"
+  }
+}
