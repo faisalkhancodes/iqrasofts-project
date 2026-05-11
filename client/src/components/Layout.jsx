@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { useScrollReveal, useSmoothHashLinks } from "../hooks/useScrollReveal.js";
 
 const nav = [
   { to: "/", label: "Home", end: true },
@@ -12,15 +13,23 @@ const nav = [
 
 export default function Layout({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  useScrollReveal();
+  useSmoothHashLinks();
 
   return (
     <>
       <header>
         <div className="container">
           <nav>
-            <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
-              <img src="/pictures/iqrasoftlogo.jpeg" alt="IqraSoft" />
-            </Link>
+            <div className="logo">
+              <Link
+                to="/"
+                onClick={() => setMenuOpen(false)}
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <img src="/pictures/iqrasoftlogo.jpeg" alt="IqraSoft" />
+              </Link>
+            </div>
             <ul className={`nav-links${menuOpen ? " active" : ""}`}>
               {nav.map(({ to, label, end }) => (
                 <li key={to}>
@@ -35,24 +44,43 @@ export default function Layout({ children }) {
                 </li>
               ))}
             </ul>
-            <button
-              type="button"
+            <div
               className="mobile-menu-btn"
-              aria-label="Menu"
               onClick={() => setMenuOpen((o) => !o)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setMenuOpen((o) => !o);
+                }
+              }}
+              role="button"
+              tabIndex={0}
             >
               <i className="fas fa-bars" />
-            </button>
+            </div>
           </nav>
         </div>
       </header>
       <main>{children}</main>
-      <footer className="footer">
-        <div className="container">
-          <p>
-            © {new Date().getFullYear()} IqraSoft — React · Node.js · MongoDB ·
-            Python AI
-          </p>
+      <footer>
+        <div className="container footer-content">
+          <p>&copy; 2026 IqraSoft. All Rights Reserved.</p>
+          <div className="social-links">
+            <a
+              href="https://www.facebook.com/share/1aTmrXt41B/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fab fa-facebook-f" />
+            </a>
+            <a
+              href="https://linkedin.com/company/iqrasofts"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="fab fa-linkedin-in" />
+            </a>
+          </div>
         </div>
       </footer>
     </>
