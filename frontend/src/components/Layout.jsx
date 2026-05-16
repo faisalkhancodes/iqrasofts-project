@@ -67,14 +67,14 @@ export default function Layout({ children }) {
           <p>&copy; 2026 IqraSoft. All Rights Reserved.</p>
           <div className="social-links">
             <a
-              href="https://www.facebook.com/share/1aTmrXt41B/"
+              href="https://www.facebook.com/share/1CxVfo9Qvm/"
               target="_blank"
               rel="noopener noreferrer"
             >
               <i className="fab fa-facebook-f" />
             </a>
             <a
-              href="https://linkedin.com/company/iqrasofts"
+              href="https://www.linkedin.com/company/iqrasoftscom/"
               target="_blank"
               rel="noopener noreferrer"
             >
