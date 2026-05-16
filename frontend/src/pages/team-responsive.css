@@ -8,6 +8,10 @@
   .team-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
   }
+  .join-features {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
 }
 @media (max-width: 768px) {
   .team-member.featured {
@@ -48,7 +52,39 @@
   body {
     overflow-x: hidden !important;
   }
+  .join-features {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    margin: 2rem 0 !important;
+  }
+  .join-feature i {
+    font-size: 2.5rem !important;
+  }
+  .join-feature h3 {
+    font-size: 1.1rem !important;
+  }
 }
+@media (max-width: 992px) {
+  .join-features {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .join-features {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+    margin: 2rem 0 !important;
+  }
+  .join-feature i {
+    font-size: 2.5rem !important;
+  }
+  .join-feature h3 {
+    font-size: 1.1rem !important;
+  }
+}
+
 @media (max-width: 480px) {
   .member-achievements ul {
     padding-left: 1rem;
@@ -70,5 +106,19 @@
   }
   .section {
     padding: 60px 0 !important;
+  }
+  .join-features {
+    grid-template-columns: 1fr !important;
+  }
+  .join-feature i {
+    font-size: 2rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  .join-feature h3 {
+    font-size: 1rem !important;
+    margin-bottom: 0.35rem !important;
+  }
+  .join-feature p {
+    font-size: 0.9rem !important;
   }
 }

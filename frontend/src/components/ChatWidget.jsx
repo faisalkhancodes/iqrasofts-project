@@ -119,7 +119,7 @@ export default function ChatWidget() {
         <div className="ai-chat-header">
           <div className="ai-assistant-info">
             <img
-              src="/pictures/iqrasoftlogo.jpeg"
+              src="/pictures/iqrasoftlogo.png"
               alt="IqraSoft Logo"
               className="ai-avatar"
             />
@@ -137,7 +137,7 @@ export default function ChatWidget() {
         <div className="ai-chat-header">
           <div className="ai-assistant-info">
             <img
-              src="/pictures/iqrasoftlogo.jpeg"
+              src="/pictures/iqrasoftlogo.png"
               alt="IqraSoft Logo"
               className="ai-avatar"
             />
@@ -259,7 +259,7 @@ export default function ChatWidget() {
         aria-controls="ai-chat-widget"
       >
         <img
-          src="/pictures/iqrasoftlogo.jpeg"
+          src="/pictures/iqrasoftlogo.png"
           alt="AI Icon"
           style={{
             width: 25,

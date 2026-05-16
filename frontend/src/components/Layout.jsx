@@ -27,7 +27,7 @@ export default function Layout({ children }) {
                 onClick={() => setMenuOpen(false)}
                 style={{ display: "flex", alignItems: "center" }}
               >
-                <img src="/pictures/iqrasoftlogo.jpeg" alt="IqraSoft" />
+                <img src="/pictures/iqrasoftlogo.png" alt="IqraSoft" />
               </Link>
             </div>
             <ul className={`nav-links${menuOpen ? " active" : ""}`}>

@@ -124,7 +124,7 @@ export default function Projects() {
 
             <div className="portfolio-card reveal" data-category="web">
               <div className="project-image">
-                <img src="/pictures/iqrasoftlogo.jpeg" alt="IqraSoft" />
+                <img src="/pictures/iqrasoftlogo.png" alt="IqraSoft" />
                 <div className="project-overlay">
                   <a
                     href="https://IqraSofts.com"
