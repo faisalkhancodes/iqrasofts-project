@@ -24,11 +24,7 @@ app.use(
 
 app.use(express.json({ limit: "1mb" }));
 
-// Request logging (optional - for debugging)
-app.use((req, res, next) => {
-  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
-  next();
-});
+// Request logging middleware
 
 /**
  * Health Check Endpoint
@@ -56,10 +52,11 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("[DB] MongoDB connected successfully"))
+  .then(() => {
+    // MongoDB connected
+  })
   .catch((err) => {
-    console.error("[DB ERROR] MongoDB connection failed:", err.message);
-    console.log("[DB] NOTE: Contact saving disabled until MongoDB is running");
+    // MongoDB connection error - contacts will be unavailable
   });
 
 /**
@@ -72,12 +69,5 @@ app.use(errorHandler);
  * Start Server
  */
 app.listen(PORT, () => {
-  console.log(`
-╔════════════════════════════════════╗
-║   IqraSoft API Server Started      ║
-║   Port: ${PORT}                         ║
-║   Environment: ${process.env.NODE_ENV || "development"}              ║
-║   MongoDB: ${MONGODB_URI}║
-╚════════════════════════════════════╝
-  `);
+  // IqraSoft API Server is running
 });

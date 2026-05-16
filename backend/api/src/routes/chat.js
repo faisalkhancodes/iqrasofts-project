@@ -17,8 +17,6 @@ router.post(
     const { messages } = req.body;
 
     try {
-      console.log(`[CHAT] Sending ${messages.length} messages to AI service...`);
-
       // Call AI service with timeout and error handling
       const response = await axios.post(
         `${aiServiceUrl}/chat`,
@@ -29,13 +27,9 @@ router.post(
         }
       );
 
-      console.log("[CHAT] AI service responded successfully");
-
       // Return AI response
       res.json(response.data);
     } catch (error) {
-      console.error("[CHAT ERROR]", error.message);
-
       // Handle different types of errors
       if (error.response) {
         // AI service returned an error

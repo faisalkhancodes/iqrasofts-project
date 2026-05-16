@@ -34,8 +34,7 @@ router.post(
         message,
       });
 
-      // Log successful submission
-      console.log(`[SUCCESS] Contact created: ${contact._id}`);
+      // Contact created successfully
 
       res.status(201).json({
         ok: true,
@@ -43,7 +42,6 @@ router.post(
         message: "Your message has been received successfully",
       });
     } catch (error) {
-      console.error("[DB ERROR]", error);
       throw new AppError("Failed to save contact. Please try again.", 500);
     }
   })
