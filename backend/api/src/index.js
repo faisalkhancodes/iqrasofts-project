@@ -29,7 +29,7 @@ app.use(express.json({ limit: "1mb" }));
 /**
  * Health Check Endpoint
  */
-app.get("/api/health", (req, res) => {
+app.get("/health", (req, res) => {
   res.json({
     ok: true,
     timestamp: new Date().toISOString(),
@@ -41,8 +41,8 @@ app.get("/api/health", (req, res) => {
 /**
  * API Routes
  */
-app.use("/api/contacts", contactRoutes);
-app.use("/api/chat", chatRoutes);
+app.use("/contacts", contactRoutes);
+app.use("/chat", chatRoutes);
 
 /**
  * MongoDB Connection
@@ -71,3 +71,5 @@ app.use(errorHandler);
 app.listen(PORT, () => {
   // IqraSoft API Server is running
 });
+
+module.exports = app;
