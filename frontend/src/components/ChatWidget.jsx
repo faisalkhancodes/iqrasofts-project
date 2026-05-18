@@ -141,9 +141,7 @@ export default function ChatWidget() {
         <div id="ai-chat-messages" className="ai-chat-messages">
           <div className="message bot-message">
             <p>
-              Hello! 👋 I&apos;m the IqraSoft AI Assistant. How can I help you
-              today? Would you like to know more about our Web Development,
-              Cybersecurity, or UI/UX services?
+              Hey there! 👋 I&apos;m IqraSofts AI Assistant. What can I help you with today? 😊
             </p>
           </div>
           {error && (
