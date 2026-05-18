@@ -126,24 +126,6 @@ export default function ChatWidget() {
             <div>
               <h4>IqraSoft AI Assistant</h4>
               <span className="ai-status">Online</span>
-
-  return (
-    <>
-      <div
-        id="ai-chat-widget"
-        className={`ai-widget-container${open ? "" : " closed"}`}
-        aria-hidden={!open}
-      >
-        <div className="ai-chat-header">
-          <div className="ai-assistant-info">
-            <img
-              src="/pictures/iqrasoftlogo.png"
-              alt="IqraSoft Logo"
-              className="ai-avatar"
-            />
-            <div>
-              <h4>IqraSoft AI Assistant</h4>
-              <span className="ai-status">Online</span>
             </div>
           </div>
           <button

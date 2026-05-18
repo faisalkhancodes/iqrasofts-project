@@ -2,7 +2,7 @@
   "name": "iqrasoft-ai-service",
   "private": true,
   "scripts": {
-    "dev": "python -m uvicorn main:app --reload --host 127.0.0.1 --port 5050",
-    "start": "python -m uvicorn main:app --host 127.0.0.1 --port 5050"
+    "dev": "C:\\Users\\hp\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe -m pip install -q -r requirements.txt && C:\\Users\\hp\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe -m uvicorn main:app --reload --host 127.0.0.1 --port 5050",
+    "start": "C:\\Users\\hp\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe -m uvicorn main:app --host 127.0.0.1 --port 5050"
   }
 }
