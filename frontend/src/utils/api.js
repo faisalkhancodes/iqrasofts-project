@@ -2,7 +2,7 @@
  * API service functions with error handling and validation
  */
 
-const API_BASE = '/api';
+const API_BASE = 'https://iqrasofts-backend.vercel.app';
 const TIMEOUT = 30000; // 30 seconds
 
 async function apiCall(endpoint, options = {}) {
