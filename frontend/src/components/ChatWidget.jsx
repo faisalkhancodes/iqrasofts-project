@@ -186,7 +186,7 @@ export default function ChatWidget() {
           <textarea
             ref={textareaRef}
             id="ai-chat-input"
-            placeholder="Type your message... (max 2000 chars)"
+            placeholder="Type your message..."
             rows={1}
             value={input}
             onChange={(e) => {
