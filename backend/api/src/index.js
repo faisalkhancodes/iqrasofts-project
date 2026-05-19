@@ -52,12 +52,15 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 /**
- * Connect to MongoDB then start server
+ * Connect to MongoDB in background (don't block server start)
  */
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`🚀 IqraSofts API running on port ${PORT}`);
-  });
+connectDB();
+
+/**
+ * Start Server immediately
+ */
+app.listen(PORT, () => {
+  console.log(`🚀 IqraSofts API running on http://localhost:${PORT}`);
 });
 
 module.exports = app;

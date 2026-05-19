@@ -1,12 +1,11 @@
 {
   "name": "iqrasofts",
-  "description": "Iqrasofts - Professional Software Development. React Frontend + AI Backend",
+  "description": "IqraSofts - Professional Software Development. React Frontend + Express API",
   "private": true,
   "scripts": {
-    "install:all": "npm install --prefix frontend && npm install --prefix backend/ai && npm install --prefix backend/api",
-    "dev": "concurrently -n frontend,backend-ai,backend-api \"npm run dev --prefix frontend\" \"npm run dev --prefix backend/ai\" \"npm run dev --prefix backend/api\"",
+    "install:all": "npm install --prefix frontend && npm install --prefix backend/api",
+    "dev": "concurrently -n frontend,api --prefix-colors cyan,green \"npm run dev --prefix frontend\" \"npm run dev --prefix backend/api\"",
     "dev:frontend": "npm run dev --prefix frontend",
-    "dev:ai": "npm run dev --prefix backend/ai",
     "dev:api": "npm run dev --prefix backend/api",
     "build": "npm run build --prefix frontend"
   },
