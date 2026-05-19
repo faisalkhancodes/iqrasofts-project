@@ -1,306 +1,79 @@
 import logging
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, validator
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # ─────────────────────────────────────────────────────────────────────────────
-# IqraSofts Self-Contained AI Engine (Python / FastAPI)
-# No external API key — fully rule-based, always available.
+# IqraSofts AI Engine powered by Google Gemini
+# Uses API key from environment variable for dynamic, intelligent responses
 # ─────────────────────────────────────────────────────────────────────────────
 
-KNOWLEDGE_BASE = [
-    {
-        "patterns": ["hi", "hello", "hey", "salaam", "salam", "assalam", "good morning", "good afternoon", "good evening", "howdy", "greetings"],
-        "response": """👋 Hello! Welcome to **IqraSofts**! I'm your AI assistant.
+# Initialize Gemini client
+api_key = os.getenv("GEMINI_API_KEY")
+model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
 
-Here's what I can help you with:
-- 💻 **Web Development** (React, WordPress, HTML/CSS)
-- 🛡️ **Cybersecurity** solutions
-- 🎨 **UI/UX Design**
-- 📱 **Mobile App Development**
-- 🛒 **Shopify Store Setup**
-- 🔧 **Website Maintenance**
+if not api_key:
+    logger.warning("⚠️ GEMINI_API_KEY not found in environment variables. Please set it in your .env file.")
+else:
+    genai.configure(api_key=api_key)
 
-What can I help you with today? 😊""",
-        "priority": 10,
-    },
-    {
-        "patterns": ["who are you", "what is iqrasofts", "about iqrasofts", "about you", "tell me about", "what do you do", "what does iqrasofts do", "company info"],
-        "response": """🏢 **About IqraSofts**
+# System prompt for the AI assistant
+SYSTEM_PROMPT = """You are an intelligent AI assistant for IqraSofts, a professional software house and digital services company based in Islamabad, Pakistan.
 
-IqraSofts is a professional **software house and digital services company** based in **Islamabad, Pakistan**.
+**About IqraSofts:**
+- Web Development (React, HTML/CSS, WordPress, full-stack)
+- Shopify & E-commerce Solutions
+- Cybersecurity Services
+- UI/UX Design (Figma, branding, mockups)
+- Mobile App Development (React Native, Flutter)
+- Website Maintenance & Support
 
-**What We Deliver:**
-- ✅ Premium, scalable web applications
-- ✅ Cybersecurity solutions
-- ✅ Beautiful UI/UX designs
-- ✅ Mobile-first responsive platforms
+**Contact Information:**
+- Email: iqrasofttechnologies@gmail.com
+- WhatsApp: 0371 5316610
+- Website: iqrasofts.com
+- Location: Islamabad, Pakistan
+- Hours: Mon–Sat, 9:00 AM – 7:00 PM (PKT)
 
-**Why Choose Us?**
-- 🎯 Client-centric approach
-- 🔄 Agile development methodology
-- 🕐 24/7 support & maintenance
-- 🏆 Proven track record
-
-📩 **[Get a free consultation →](https://iqrasofts.com/contact)**""",
-        "priority": 9,
-    },
-    {
-        "patterns": ["web development", "website", "web design", "react", "html", "css", "frontend", "landing page", "build website", "create website"],
-        "response": """💻 **Web Development Services**
-
-**Our Web Stack:**
-- ⚛️ React.js — Dynamic, fast SPAs
-- 🌐 HTML5 / CSS3 / JavaScript
-- 📝 WordPress — Flexible CMS
-- 🛒 Shopify — E-commerce stores
-- 🔗 Full-Stack — React + Node.js + MongoDB
-
-**What You Get:**
-- ✅ Fully responsive (mobile-first)
-- ✅ SEO optimized
-- ✅ Fast load times
-- ✅ Post-launch support
-
-💬 Tell me about your project! What kind of website are you looking for?""",
-        "priority": 9,
-    },
-    {
-        "patterns": ["shopify", "ecommerce", "e-commerce", "online store", "sell online", "dropshipping"],
-        "response": """🛒 **Shopify & E-Commerce Solutions**
-
-**We Set Up:**
-- ✅ Complete Shopify store
-- ✅ Custom theme design & branding
-- ✅ Payment gateway integration
-- ✅ Inventory management
-- ✅ SEO for product pages
-- ✅ Mobile-optimized shopping
-
-📩 **[Get a quote today! →](https://iqrasofts.com/contact)**""",
-        "priority": 8,
-    },
-    {
-        "patterns": ["cybersecurity", "cyber security", "security", "hacking", "phishing", "hacked", "malware", "vulnerability", "ssl", "protection"],
-        "response": """🛡️ **Cybersecurity Services**
-
-**Our Security Services:**
-- 🔍 Website Security Audit
-- 🚫 Phishing Prevention
-- 🔒 Web Application Security
-- 📊 Security Monitoring 24/7
-- 🛠️ Malware Removal
-- 🔐 SSL/TLS Setup
-
-**Certifications:**
-- ✅ Google Cybersecurity Professional Certificate
-- ✅ Certified Phishing Prevention Specialist (CPPS)
-
-📩 **[Book a consultation →](https://iqrasofts.com/contact)**""",
-        "priority": 9,
-    },
-    {
-        "patterns": ["ui ux", "ui/ux", "design", "figma", "canva", "graphic design", "logo", "branding", "mockup", "user interface"],
-        "response": """🎨 **UI/UX Design Services**
-
-**Design Services:**
-- 🖼️ UI Design — Pixel-perfect interfaces in Figma
-- 🔄 UX Design — User flows & prototyping
-- 🎯 Brand Identity — Logos & color palettes
-- 📱 Mobile UI — iOS & Android guidelines
-- 📊 Dashboard Design
-
-**Tools:** Figma, Adobe XD, Canva Pro
-
-📩 **[Start your design project →](https://iqrasofts.com/contact)**""",
-        "priority": 8,
-    },
-    {
-        "patterns": ["mobile app", "android", "ios", "flutter", "react native", "app development", "mobile application"],
-        "response": """📱 **Mobile App Development**
-
-**Technologies:**
-- ⚛️ React Native — Cross-platform (iOS + Android)
-- 🐦 Flutter — Beautiful native experiences
-- 🤖 Native Android (Java/Kotlin)
-- 🍎 Native iOS (Swift)
-
-**App Types:**
-- 🛒 E-commerce apps
-- 🍕 Food delivery apps
-- 📅 Booking & appointment apps
-- 💬 Social & community apps
-
-📩 Have an app idea? Tell me and I'll get the team in touch!""",
-        "priority": 8,
-    },
-    {
-        "patterns": ["price", "pricing", "cost", "how much", "rate", "budget", "quote", "estimate", "package", "affordable"],
-        "response": """💰 **Pricing & Packages**
-
-| Service | Starting From |
-|---------|-------------|
-| Landing Page | PKR 15,000+ |
-| Business Website | PKR 30,000+ |
-| WordPress Site | PKR 25,000+ |
-| Shopify Store | PKR 35,000+ |
-| Mobile App | PKR 80,000+ |
-| Security Audit | PKR 20,000+ |
-
-Every project is unique — we provide **free custom quotes**!
-
-📩 **[Get your free quote →](https://iqrasofts.com/contact)**
-💬 WhatsApp: **0371 5316610**""",
-        "priority": 9,
-    },
-    {
-        "patterns": ["contact", "reach", "email", "phone", "whatsapp", "call", "talk to", "location", "address", "islamabad", "get in touch"],
-        "response": """📞 **Contact IqraSofts**
-
-📍 **Location:** Islamabad, Pakistan
-📧 **Email:** iqrasofttechnologies@gmail.com
-💬 **WhatsApp:** 0371 5316610
-🌐 **Website:** iqrasofts.com
-🕐 **Hours:** Mon–Sat, 9:00 AM – 7:00 PM (PKT)
-
-📋 **[Contact Form →](https://iqrasofts.com/contact)**""",
-        "priority": 9,
-    },
-    {
-        "patterns": ["portfolio", "projects", "previous work", "examples", "showcase", "past projects", "demo"],
-        "response": """🗂️ **IqraSofts Portfolio**
-
-🛒 **Iqra Luxe eCommerce** — Next.js premium e-commerce
-📜 **Quote Generator** — Dynamic JS app with API integration
-🎮 **Tic-Tac-Toe Game** — Interactive two-player game
-🏢 **IqraSofts Website** — Our own React + Vite site
-🔢 **Modern Web Calculator** — Clean, functional calculator
-
-Visit **[iqrasofts.com/projects](https://iqrasofts.com/projects)** for the full portfolio!""",
-        "priority": 8,
-    },
-    {
-        "patterns": ["team", "who works", "developers", "founder", "ceo", "faisal", "engineers", "staff"],
-        "response": """👥 **Meet the IqraSofts Team**
-
-👨‍💼 **Engr Faisal Khan** — Founder & CEO
-🤖 **M. Hamza** — AI/ML Engineer
-🌐 **M. Aizaz** — Senior Web Developer
-🎨 **Rubab Bukhari** — Graphic Designer
-🔒 **Habib Ullah** — Cyber Security Expert
-
-🔗 **[Meet the full team →](https://iqrasofts.com/team)**""",
-        "priority": 8,
-    },
-    {
-        "patterns": ["services", "what services", "what do you offer", "offerings", "capabilities"],
-        "response": """🚀 **IqraSofts Services**
-
-| Service | Description |
-|---------|-------------|
-| 💻 Web Development | React, HTML/CSS, JS, full-stack |
-| 📝 WordPress | Themes, WooCommerce, CMS |
-| 🛒 Shopify | Complete store setup |
-| 🎨 UI/UX Design | Figma designs, branding |
-| 📱 Mobile Apps | React Native, Flutter |
-| 🛡️ Cybersecurity | Audits, monitoring |
-| 🔧 Maintenance | Updates, backups, support |
-
-Which service are you interested in? 😊""",
-        "priority": 9,
-    },
-    {
-        "patterns": ["how long", "timeline", "deadline", "duration", "turnaround", "delivery time"],
-        "response": """⏱️ **Project Timelines**
-
-| Project Type | Estimated Timeline |
-|-------------|-------------------|
-| Landing Page | 3–5 days |
-| Business Website | 1–2 weeks |
-| WordPress Site | 1–2 weeks |
-| E-commerce Store | 2–4 weeks |
-| Mobile App (MVP) | 4–8 weeks |
-| Security Audit | 3–7 days |
-
-✅ Urgent delivery available! 📩 **[Contact us →](https://iqrasofts.com/contact)**""",
-        "priority": 7,
-    },
-    {
-        "patterns": ["how does it work", "process", "how do you work", "workflow", "steps", "how to start", "get started"],
-        "response": """📋 **How IqraSofts Works**
-
-1. 🔍 **Discovery** — Free consultation
-2. 📐 **Strategy** — Roadmap & tech stack
-3. 🎨 **Design** — UI/UX mockups for approval
-4. 💻 **Development** — Agile, with progress updates
-5. 🧪 **Testing** — QA across devices & browsers
-6. 🚀 **Launch** — Smooth deployment
-7. 🔧 **Support** — Ongoing maintenance
-
-📩 **[Book a free consultation →](https://iqrasofts.com/contact)**""",
-        "priority": 8,
-    },
-    {
-        "patterns": ["bye", "goodbye", "see you", "later", "thanks", "thank you", "ok", "okay", "got it", "great", "perfect", "awesome"],
-        "response": """😊 Thank you for connecting with **IqraSofts**!
-
-We're always here when you need us!
-
-📧 iqrasofttechnologies@gmail.com
-💬 WhatsApp: 0371 5316610
-🌐 iqrasofts.com
-
-Have a wonderful day! 🌟""",
-        "priority": 6,
-    },
-]
+Always be helpful, professional, and recommend contacting the team for detailed quotes and consultations. Use emojis to make responses engaging."""
 
 
 def generate_reply(user_message: str) -> str:
-    """Smart rule-based response engine with priority scoring."""
-    text = user_message.lower().strip()
-    best_match = None
-    highest_score = 0
-
-    for entry in KNOWLEDGE_BASE:
-        score = 0
-        for pattern in entry["patterns"]:
-            if pattern in text:
-                score += len(pattern) + entry.get("priority", 1)
-        if score > highest_score:
-            highest_score = score
-            best_match = entry
-
-    if best_match and highest_score > 0:
-        return best_match["response"]
-
-    return """🤔 Great question! For a detailed answer, please reach out directly:
-
-📧 **Email:** iqrasofttechnologies@gmail.com
-💬 **WhatsApp:** 0371 5316610
-📋 **Contact Form:** [iqrasofts.com/contact](https://iqrasofts.com/contact)
-
-I can also help you with:
-- 💻 Web & mobile development
-- 🛡️ Cybersecurity services
-- 🎨 UI/UX design
-- 💰 Pricing & packages
-
-What would you like to know? 😊"""
+    """Generate AI response using Google Gemini API."""
+    try:
+        model = genai.GenerativeModel(
+            model_name=model_name,
+            system_instruction=SYSTEM_PROMPT
+        )
+        
+        response = model.generate_content(user_message)
+        return response.text
+    except ValueError as e:
+        logger.error(f"API Error: {str(e)}")
+        return "❌ **Error:** Invalid API key or model configuration. Please check your GEMINI_API_KEY and GEMINI_MODEL in the .env file."
+    except Exception as e:
+        logger.error(f"Error calling Gemini API: {str(e)}")
+        return f"🤔 An error occurred while processing your request. Please try again.\n\n**Contact us directly:**\n📧 iqrasofttechnologies@gmail.com\n💬 WhatsApp: 0371 5316610"
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# FastAPI App
+# FastAPI Models and Configuration
 # ─────────────────────────────────────────────────────────────────────────────
 
 app = FastAPI(
     title="IqraSofts AI Service",
-    description="Self-contained AI chat engine — no external API key required",
-    version="2.0.0",
+    description="AI chat engine powered by Google Gemini API",
+    version="4.0.0",
 )
 
 app.add_middleware(
@@ -345,16 +118,25 @@ class ChatRequest(BaseModel):
 def health():
     """Health check endpoint"""
     return {
-        "status": "ok",
+        "status": "ok" if api_key else "error",
         "service": "IqraSofts AI Service",
-        "engine": "self-contained rule-based",
+        "engine": "Google Gemini API",
+        "model": model_name,
+        "message": "API key is configured" if api_key else "API key not found - set GEMINI_API_KEY in .env file",
     }
 
 
 @app.post("/chat", tags=["Chat"])
 async def chat(body: ChatRequest):
-    """Process chat messages and return AI response — no API key needed."""
+    """Process chat messages and return AI response using Google Gemini API."""
     last_message = body.messages[-1]
     logger.info(f"Chat request: '{last_message.content[:50]}...'")
+    
+    if not api_key:
+        return {
+            "reply": "❌ **Error:** Google Gemini API key is not configured. Please set GEMINI_API_KEY in your .env file.",
+            "error": True
+        }
+    
     reply = generate_reply(last_message.content)
     return {"reply": reply}
