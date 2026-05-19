@@ -64,7 +64,7 @@ export default function Layout({ children }) {
       <main>{children}</main>
       <footer>
         <div className="container footer-content">
-          <p>&copy; 2026 IqraSoft. All Rights Reserved.</p>
+          <p>&copy; 2026 IqraSofts Technologies. All Rights Reserved.</p>
           <div className="social-links">
             <a
               href="https://www.facebook.com/share/1CxVfo9Qvm/"
