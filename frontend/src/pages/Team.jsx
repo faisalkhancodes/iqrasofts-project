@@ -51,7 +51,7 @@ export default function Team() {
                 <h3>Engr Faisal Khan</h3>
                 <p className="member-role">Founder & CEO</p>
                 <p className="member-bio">
-                  Leading the vision of IqraSoft to deliver excellence in digital
+                  Leading the vision of Iqrasofts to deliver excellence in digital
                   solutions. With extensive experience in software engineering,
                   business strategy, and team leadership, Faisal brings innovation
                   and technical expertise to every project.

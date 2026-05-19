@@ -1,6 +1,6 @@
 {
   "name": "iqrasofts",
-  "description": "IqraSoft - Professional Software Development. React Frontend + AI Backend",
+  "description": "Iqrasofts - Professional Software Development. React Frontend + AI Backend",
   "private": true,
   "scripts": {
     "install:all": "npm install --prefix frontend && npm install --prefix backend/ai && npm install --prefix backend/api",

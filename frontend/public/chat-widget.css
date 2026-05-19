@@ -250,6 +250,15 @@
     overflow-y: auto;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     background: #F9FAFB;
+    min-width: 350px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#ai-chat-input::placeholder {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #ai-chat-input:focus {
