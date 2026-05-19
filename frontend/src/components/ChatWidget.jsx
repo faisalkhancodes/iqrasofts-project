@@ -124,7 +124,7 @@ export default function ChatWidget() {
               className="ai-avatar"
             />
             <div>
-              <h4>IqraSoft AI Assistant</h4>
+              <h4>IqraSofts AI Assistant</h4>
               <span className="ai-status">Online</span>
             </div>
           </div>
@@ -250,7 +250,7 @@ export default function ChatWidget() {
             padding: 2,
           }}
         />
-        <span className="ai-fab-text">IqraSoft AI Assistant</span>
+        <span className="ai-fab-text">IqraSofts AI Assistant</span>
       </button>
     </>
   );

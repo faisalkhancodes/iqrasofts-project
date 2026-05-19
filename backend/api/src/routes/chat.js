@@ -5,7 +5,7 @@ const { asyncHandler, AppError } = require("../middleware/errorHandler");
 
 const router = express.Router();
 
-const SYSTEM_PROMPT = `Identity: You are the official AI Assistant for IqraSoft, a professional software house and digital services venture. Your goal is to be helpful, professional, and technically savvy.
+const SYSTEM_PROMPT = `Identity: You are the official AI Assistant for IqraSofts, a professional software house and digital services venture. Your goal is to be helpful, professional, and technically savvy.
 
 Core Services to Mention:
 - Web Development: Frontend (React, HTML, CSS), WordPress, and full CMS solutions.
