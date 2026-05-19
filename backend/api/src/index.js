@@ -2,36 +2,35 @@ require("dotenv").config({ path: require("path").join(__dirname, "..", ".env") }
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const connectDB = require("./db");
 const contactRoutes = require("./routes/contacts");
 const chatRoutes = require("./routes/chat");
+const projectRoutes = require("./routes/projects");
+const blogRoutes = require("./routes/blog");
 const { errorHandler, notFoundHandler } = require("./middleware/errorHandler");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/iqrasoft";
 
 /**
- * Middleware Setup
+ * Middleware
  */
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN || "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
-
 app.use(express.json({ limit: "1mb" }));
 
-// Request logging middleware
-
 /**
- * Health Check Endpoint
+ * Health Check
  */
 app.get("/health", (req, res) => {
   res.json({
     ok: true,
+    service: "IqraSofts API",
     timestamp: new Date().toISOString(),
     database: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
     uptime: process.uptime(),
@@ -43,33 +42,22 @@ app.get("/health", (req, res) => {
  */
 app.use("/contacts", contactRoutes);
 app.use("/chat", chatRoutes);
+app.use("/projects", projectRoutes);
+app.use("/blog", blogRoutes);
 
 /**
- * MongoDB Connection
- */
-mongoose
-  .connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    // MongoDB connected
-  })
-  .catch((err) => {
-    // MongoDB connection error - contacts will be unavailable
-  });
-
-/**
- * Error Handling Middleware (must be after all routes)
+ * Error Handling (must be after all routes)
  */
 app.use(notFoundHandler);
 app.use(errorHandler);
 
 /**
- * Start Server
+ * Connect to MongoDB then start server
  */
-app.listen(PORT, () => {
-  // IqraSoft API Server is running
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 IqraSofts API running on port ${PORT}`);
+  });
 });
 
 module.exports = app;

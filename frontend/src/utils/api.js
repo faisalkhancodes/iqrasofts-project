@@ -55,6 +55,20 @@ export async function submitContact(contactData) {
 }
 
 /**
+ * Fetch all projects from the database
+ */
+export async function fetchProjects() {
+  return apiCall('/projects');
+}
+
+/**
+ * Fetch all published blog posts from the database
+ */
+export async function fetchBlogPosts() {
+  return apiCall('/blog');
+}
+
+/**
  * Send a chat message to AI service
  */
 export async function sendChatMessage(messages) {
