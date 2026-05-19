@@ -1,11 +1,11 @@
-# IqraSofts - Professional Software Development
+# Iqrasofts - Professional Software Development
 
 A modern full-stack application with React frontend and AI-powered backend services.
 
 ## 📁 Project Structure
 
 ```
-IqraSofts/
+Iqrasofts/
 ├── frontend/              # React app with Vite
 │   ├── src/
 │   ├── public/
@@ -30,7 +30,7 @@ The frontend is a modern, responsive Single Page Application (SPA) built with Re
 
 ### 📄 Pages
 - **Home (`/`)**: The main landing page showcasing the company overview, core values, and quick links.
-- **Services (`/services`)**: Details about the software development and IT services provided by IqraSofts.
+- **Services (`/services`)**: Details about the software development and IT services provided by Iqrasofts.
 - **Projects (`/projects`)**: A portfolio showcasing previous work, client projects, and case studies.
 - **Team (`/team`)**: Introduces the core team members, their roles, and expertise.
 - **Blog (`/blog`)**: Articles, insights, and news related to technology and software development.
@@ -48,7 +48,7 @@ The application uses a microservices-inspired dual-backend approach to separate 
 
 ### 🤖 AI Service (`/backend/ai`)
 A fast, lightweight Python server built with **FastAPI** to handle the AI assistant operations.
-- **Role**: Acts as the official AI Assistant for IqraSoft to handle lead generation, answer service questions, and act as a digital consultant.
+- **Role**: Acts as the official AI Assistant for Iqrasofts to handle lead generation, answer service questions, and act as a digital consultant.
 - **Core Technology**: Python, FastAPI, and the `openai` SDK.
 - **Endpoints**:
   - `GET /health`: Basic health check endpoint.

@@ -35,7 +35,7 @@ Behavioral Rules:
 - Fallback: If you don't know an answer, say: "That's a great question! For specific technical details, I recommend speaking with our lead engineers directly. Would you like me to guide you to our contact page?"
 """
 
-app = FastAPI(title="IqraSoft AI Service")
+app = FastAPI(title="Iqrasofts AI Service")
 
 # CORS middleware configuration
 origins = os.getenv("CORS_ORIGINS", "*").split(",")
@@ -84,7 +84,7 @@ def health() -> dict[str, str]:
     """Health check endpoint"""
     return {
         "status": "ok",
-        "service": "IqraSoft AI Service",
+        "service": "Iqrasofts AI Service",
     }
 
 
@@ -111,7 +111,7 @@ async def chat(body: ChatRequest) -> dict[str, str]:
     # If empty history, return greeting
     if not body.messages:
         return {
-            "reply": "Hello! I am the IqraSoft AI Assistant. How can I help you today?"
+            "reply": "Hello! I am the Iqrasofts AI Assistant. How can I help you today?"
         }
 
     try:
