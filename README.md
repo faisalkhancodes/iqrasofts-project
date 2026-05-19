@@ -1,66 +1,120 @@
 # IqraSofts — Professional Software Development
 
-A modern full-stack application with a React (Vite) frontend and an Express.js + Google Gemini AI-powered backend, deployed on Vercel.
+A modern full-stack application with a React (Vite) frontend and an Express.js backend with a **100% self-contained AI Chat Engine** — no external API keys required.
 
 ## 📁 Project Structure
 
 ```
 IqraSofts/
-├── frontend/              # React 18 + Vite SPA
+├── frontend/                  # React 18 + Vite SPA
 │   ├── src/
-│   │   ├── components/    # Reusable UI components
-│   │   ├── pages/         # Route-level page components
-│   │   ├── hooks/         # Custom React hooks
-│   │   ├── utils/         # API helpers & validation
-│   │   └── lib/           # Shared libraries
+│   │   ├── components/        # ChatWidget, Layout, etc.
+│   │   ├── pages/             # Home, Blog, Projects, Team, Contact, Services
+│   │   ├── hooks/             # Scroll reveal & smooth links
+│   │   ├── utils/             # API helpers & validation
+│   │   └── data/              # Static fallback data
 │   └── public/
-│       └── pictures/      # Static images & logo
+│       └── pictures/          # Logo and team images
 ├── backend/
-│   └── api/               # Express.js API (Contacts + AI Chat)
+│   └── api/                   # Express.js REST API
 │       ├── src/
-│       │   ├── routes/    # chat.js, contacts.js
-│       │   ├── models/    # Mongoose schemas
-│       │   └── middleware/ # Error handling, validation
-│       ├── vercel.json    # Backend Vercel deployment
-│       ├── env.example    # Example environment variables
+│       │   ├── db.js          # MongoDB connection module
+│       │   ├── index.js       # Main server entry point
+│       │   ├── routes/
+│       │   │   ├── chat.js    # 🤖 Self-contained AI chat engine
+│       │   │   ├── contacts.js
+│       │   │   ├── projects.js
+│       │   │   └── blog.js
+│       │   ├── models/        # Mongoose schemas
+│       │   │   ├── Contact.js
+│       │   │   ├── Project.js
+│       │   │   └── BlogPost.js
+│       │   └── middleware/    # Error handling & validation
+│       ├── seed.js            # Database seeder script
+│       ├── env.example        # Example environment variables
+│       ├── vercel.json        # Backend Vercel deployment config
 │       └── package.json
-├── vercel.json            # Root deployment config
-└── package.json           # Root scripts
+├── vercel.json                # Root deployment config
+└── package.json               # Root scripts
 ```
 
-## 🎨 Frontend Architecture
+## 🎨 Frontend
 
-A responsive Single Page Application (SPA) built with **React 18**, **Vite**, and **React Router**.
+A responsive Single Page Application built with **React 18**, **Vite**, and **React Router**.
 
-### 📄 Pages
-- **Home (`/`)** — Landing page with hero, services preview, process, about, leadership, and contact sections.
-- **Services (`/services`)** — Full breakdown of all digital services offered by IqraSofts.
-- **Projects (`/projects`)** — Portfolio showcasing client projects and case studies.
-- **Team (`/team`)** — Team members, roles, and expertise.
-- **Blog (`/blog`)** — Articles and technology insights.
-- **Contact (`/contact`)** — Functional contact form integrated with the backend API.
+### Pages
+| Route | Description |
+|-------|-------------|
+| `/` | Landing page — hero, services, process, about, leadership, contact |
+| `/services` | Full breakdown of all services |
+| `/projects` | Portfolio loaded **live from MongoDB** |
+| `/blog` | Blog posts loaded **live from MongoDB** |
+| `/team` | Team members and expertise |
+| `/contact` | Contact form integrated with backend API |
 
-### 🧩 Core Components
-- **`Layout.jsx`** — Navigation bar, footer, and page wrapper.
-- **`ChatWidget.jsx`** — AI-powered floating chatbot available on every page.
-- **Reusable UI**: `ProjectCard`, `ServiceCard`, `TeamMember`, `BlogPostCard`, `PageHero`, `SectionHeader`.
-- **`ScrollReveal.jsx`** — Smooth scroll-triggered reveal animations.
+### Key Components
+- **`ChatWidget.jsx`** — Floating AI chat, works on every page
+- **`Layout.jsx`** — Navigation header and footer
+- **`ScrollReveal.jsx`** — Smooth scroll-triggered animations
 
-## ⚙️ Backend Architecture
+## ⚙️ Backend API
 
-A single **Express.js** server deployed on Vercel handles all backend operations.
+A single **Express.js** server with **zero external AI dependencies**.
 
-### 🤖 AI Chat Route (`POST /chat`)
-- Uses **Google Gemini** (`gemini-2.0-flash`) via the `@google/generative-ai` SDK.
-- Receives conversation history from the frontend, injects a professional IqraSofts system prompt, and returns the AI reply.
-- Requires the `GEMINI_API_KEY` environment variable.
+### API Endpoints
 
-### 📬 Contacts Route (`POST /contacts`)
-- Saves contact form submissions to **MongoDB** via Mongoose.
-- Requires the `MONGODB_URI` environment variable.
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/health` | Server & database status |
+| `POST` | `/chat` | 🤖 AI chat (self-contained engine) |
+| `POST` | `/contacts` | Save contact form submission |
+| `GET` | `/projects` | Fetch all projects from MongoDB |
+| `GET` | `/blog` | Fetch all blog posts from MongoDB |
 
-### 🏥 Health Check (`GET /health`)
-- Returns server uptime, timestamp, and database connection status.
+## 🤖 AI Chat Engine (No API Key!)
+
+The AI chat assistant is **fully self-contained** — built with a smart **rule-based pattern-matching engine** directly in `src/routes/chat.js`.
+
+### How It Works
+1. User message is converted to lowercase
+2. Engine scores each knowledge-base entry by keyword matches + priority
+3. Best-scoring response is returned instantly
+4. Graceful fallback if no match found
+
+### Knowledge Base Covers
+- 👋 Greetings & general queries
+- 🏢 About IqraSofts
+- 💻 Web Development services
+- 📝 WordPress development
+- 🛒 Shopify / E-commerce
+- 🛡️ Cybersecurity services
+- 🎨 UI/UX Design
+- 📱 Mobile App Development
+- 💰 Pricing & quotes
+- 📞 Contact information
+- 🗂️ Portfolio & projects
+- 👥 Team members
+- 📋 Work process & timeline
+- ⚙️ Tech stack
+- 📈 SEO & digital marketing
+
+**No API key. No quota limits. No failures. Always instant.** ⚡
+
+## 🗄️ Database
+
+MongoDB Atlas hosts three collections:
+
+| Collection | Contents |
+|------------|----------|
+| `contacts` | Contact form submissions |
+| `projects` | Portfolio projects |
+| `blogposts` | Blog articles |
+
+### Seeding the Database
+```bash
+cd backend/api
+node seed.js
+```
 
 ## 🚀 Quick Start
 
@@ -69,58 +123,51 @@ A single **Express.js** server deployed on Vercel handles all backend operations
 npm run install:all
 ```
 
-### Run all services (recommended)
+### Run all services
 ```bash
 npm run dev
 ```
 
-### Run individual services
+### Run individually
 ```bash
-npm run dev:frontend    # React app on http://localhost:5173
-npm run dev:api         # Express API on http://localhost:3001
+npm run dev:frontend    # React app — http://localhost:5173
+npm run dev:api         # Express API — http://localhost:3001
 ```
 
 ## 🔧 Configuration
 
-### Backend API (`.env` in `backend/api/`)
-
-Create a `.env` file using `env.example` as a template:
+Create `backend/api/.env` using `env.example` as a template:
 
 ```env
 PORT=3001
-MONGODB_URI=mongodb://127.0.0.1:27017/iqrasofts
-GEMINI_API_KEY=your-google-gemini-api-key
+MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/?appName=iqrasofts
 CORS_ORIGIN=https://iqrasofts.vercel.app
 ```
 
-> **⚠️ Important:** The `GEMINI_API_KEY` is required for the AI chat to work.  
-> Get a free key at: https://aistudio.google.com/apikey
-
-### Frontend
-Vite config lives at `frontend/vite.config.js`. No `.env` required for local development.
+> **Note:** No external AI API key is required. The chat engine runs entirely on the server.
 
 ## 📦 Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
 | Frontend | React 18 + Vite + React Router |
-| AI Chat | Google Gemini (`gemini-2.0-flash`) |
+| AI Chat | Custom rule-based engine (no external API) |
 | API Server | Express.js + MongoDB + Mongoose |
+| Database | MongoDB Atlas |
 | Deployment | Vercel (Frontend + Backend) |
-| Process Manager | Concurrently |
 
 ## 🌐 URLs
 
 | Service | Local | Production |
 |---------|-------|-----------|
-| Frontend | http://localhost:5173 | https://iqrasofts.vercel.app |
+| Frontend | http://localhost:5173 | https://iqrasofts.com |
 | API Server | http://localhost:3001 | https://iqrasofts-backend.vercel.app |
 
 ## 📝 Notes
 
-- MongoDB must be running locally for the contact form to work in development.
-- The Gemini API key must be set in both `backend/api/.env` (local) and in Vercel Environment Variables (production).
-- All services support hot-reload in development mode.
+- Only `MONGODB_URI` is required in `.env` — no external AI key needed
+- The AI chat handles 17+ topic categories out of the box
+- To add new chat responses, edit `backend/api/src/routes/chat.js` under `KNOWLEDGE_BASE`
 
 ---
 
